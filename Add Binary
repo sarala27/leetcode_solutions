@@ -1,0 +1,9 @@
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        ans, carry = [], 0
+        for a_bit, b_bit in zip_longest(reversed(a), reversed(b), fillvalue = '0'):
+            a_bit, b_bit = int(a_bit), int(b_bit)
+            ans.append(str(a_bit ^ b_bit ^ carry))
+            carry = a_bit & b_bit | a_bit & carry | b_bit & carry
+        if carry: ans.append('1')
+        return ''.join(reversed(ans))
